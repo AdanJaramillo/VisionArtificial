@@ -96,7 +96,7 @@ def detectPlatesInScene(imgOriginalScene):
         # end if
     # end for
 
-    print("\n" + str(len(listOfPossiblePlates)) + " possible plates found")  # 13 with MCLRNF1 image
+    print("\n" + str(len(listOfPossiblePlates)) + " posibles placas encontradas")  # 13 with MCLRNF1 image
 
     if Main.showSteps == True: # show steps #######################################################
         print("\n")

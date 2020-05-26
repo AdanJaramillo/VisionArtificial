@@ -30,7 +30,7 @@ def main():
         return                                                          # and exit program
     # end if
 
-    imgOriginalScene  = cv2.imread(r"C:\Users\arman\Documents\proyectosPY\Vision Artificial\auto4.jpg")               # open image
+    imgOriginalScene  = cv2.imread("Images/18.jpg")              # open image
 
     if imgOriginalScene is None:                            # if image was not read successfully
         print("\nerror: image not read from file \n\n")  # print error message to std out
@@ -67,7 +67,7 @@ def main():
 
         drawRedRectangleAroundPlate(imgOriginalScene, licPlate)             # draw red rectangle around plate
 
-        print("\nlicense plate read from image = " + licPlate.strChars + "\n")  # write license plate text to std out
+        print("\nPLACA = " + licPlate.strChars + "\n")  # write license plate text to std out
         print("---------------------------------------- "+text)
 
         writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)           # write license plate text on the image
