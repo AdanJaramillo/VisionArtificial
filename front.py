@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.filedialog import askopenfilename
 import PIL
 from tkinter.filedialog import *
 from tkinter import ttk
@@ -28,10 +29,12 @@ def webcam():
     
 
 def abrir():
-   ruta=askdirectory()
-   archivo=askopenfile()
-   archivo = open("r")
-   lines = archivo.read()
+   #archivo=askopenfile()
+   #archivo = open("r")
+   #lines = archivo.read()
+   Tk().withdraw()
+   filename = askopenfile()
+   print(filename)
 
 ventana=Tk()
 ventana.config(bg="black")
