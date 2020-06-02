@@ -100,7 +100,7 @@ def abrir():
 
         drawRedRectangleAroundPlate(imgOriginalScene, licPlate)             # dibuja un rectangulo rojo en donde estan los caracteres
 
-        print("\nlicense plate read from image = " + licPlate.strChars + "\n")  # escribe los caracteres en la ventana
+        print("\nPLACA = " + licPlate.strChars + "\n")  # escribe los caracteres en la ventana
         print("---------------------------------------- ")
 
         writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)           # escribe en la imagen los caracteres
