@@ -1,14 +1,15 @@
-#Front.py
+# Main.py
+
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 import PIL
 from tkinter.filedialog import *
 from tkinter import ttk
-import cv2
 from PIL import Image, ImageTk
 import threading
 import time
-# Main.py
+width, height = 800, 600
+
 
 import cv2
 import numpy as np
@@ -19,39 +20,15 @@ import DetectChars
 import DetectPlates
 import PossiblePlate
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-
-####################################Front#####################################################
-width, height = 800, 600
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
-
 ventana = Tk()
 ventana.bind('<Escape>', lambda e: ventana.quit())
 lmain = Label(ventana)
 lmain.pack()
 
-def webcam():
-    _, frame = cap.read()
-    frame = cv2.flip(frame, 1)
-    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    img = PIL.Image.fromarray(cv2image)
-    imgtk = ImageTk.PhotoImage(image=img)
-    lmain.imgtk = imgtk
-    lmain.configure(image=imgtk)
-    lmain.after()
-    
-
-def abrir():
-   #archivo=askopenfile()
-   #archivo = open("r")
-   #lines = archivo.read()
-   Tk().withdraw()
-   filename = askopenfile()
-   print(filename)
-
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 # variables ##########################################################################
 SCALAR_BLACK = (0.0, 0.0, 0.0)
@@ -62,8 +39,24 @@ SCALAR_RED = (0.0, 0.0, 255.0)
 
 showSteps = False
 
-###################################################################################################
-def main():
+def webcam():
+    _, frame = cap.read()
+    frame = cv2.flip(frame, 1)
+    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+    img = PIL.Image.fromarray(cv2image)
+    imgtk = ImageTk.PhotoImage(image=img)
+    lmain.imgtk = imgtk
+    lmain.configure(image=imgtk)
+    lmain.after()
+
+def abrir():
+    #    ruta=askdirectory()
+#    archivo=askopenfile()
+#    archivo = open(archivo)
+#    lines = archivo.read()
+    Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+    filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+    print(filename)
 
     blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         
 
@@ -72,7 +65,7 @@ def main():
         return                                                          # y termina la app
     # end if
 
-    imgOriginalScene  = cv2.imread(r"C:\Users\arman\Documents\proyectosPY\Vision Artificial\auto1.jpg")               # abre imagen
+    imgOriginalScene  = cv2.imread(r""+filename)               # abre imagen
 
     if imgOriginalScene is None:                            # si la imagen no se encuentra
         print("\nerror: image not read from file \n\n")  # muestra un mensaje en pantalla
@@ -121,7 +114,28 @@ def main():
     cv2.waitKey(0)					
 
     return
+
+###end abrir
+
+#########################################################################################################
+def main():
+   
+    ventana=Tk()
+    ventana.config(bg="black")
+    ventana.geometry("500x400")
+    botonAbrir=Button(ventana,text="Seleccionar archivo", command=abrir)
+    botonAbrir.grid(padx=150,pady=100)
+    botonCompila=Button(ventana,text="Camara", command=webcam)
+    botonCompila.grid(padx=210,pady=10)
+    ventana.mainloop()
+
+
 # end main
+
+###################################################################################################
+
+
+
 
 ###################################################################################################
 def drawRedRectangleAroundPlate(imgOriginalScene, licPlate):
@@ -176,26 +190,6 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 ###################################################################################################
 if __name__ == "__main__":
     main()
-
-###########################################Front##########################################################
-ventana=Tk()
-ventana.config(bg="black")
-ventana.geometry("500x400")
-botonAbrir=Button(ventana,text="Seleccionar archivo", command=abrir)
-botonAbrir.grid(padx=150,pady=100)
-botonCompila=Button(ventana,text="Camara", command=webcam)
-botonCompila.grid(padx=210,pady=10)
-
-ventana.mainloop()
-
-
-
-
-
-
-
-
-
 
 
 
