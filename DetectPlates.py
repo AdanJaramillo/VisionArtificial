@@ -95,7 +95,7 @@ def detectPlatesInScene(imgOriginalScene):
         # end if
     # end for
 
-    print("\n" + str(len(listOfPossiblePlates)) + " possible plates found")  
+    print("\n" + str(len(listOfPossiblePlates)) + " posibles placas encontradas")  
 
     if Main.showSteps == True:
         print("\n")
