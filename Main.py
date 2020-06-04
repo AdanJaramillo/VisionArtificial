@@ -20,9 +20,7 @@ import DetectChars
 import DetectPlates
 import PossiblePlate
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+
 ventana = Tk()
 ventana.bind('<Escape>', lambda e: ventana.quit())
 lmain = Label(ventana)
@@ -40,15 +38,24 @@ SCALAR_RED = (0.0, 0.0, 255.0)
 showSteps = False
 
 def webcam():
-    _, frame = cap.read()
-    frame = cv2.flip(frame, 1)
-    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    img = PIL.Image.fromarray(cv2image)
-    imgtk = ImageTk.PhotoImage(image=img)
-    lmain.imgtk = imgtk
-    lmain.configure(image=imgtk)
-    lmain.after()
+     
 
+        video_capture = cv2.VideoCapture("http://192.168.1.66:8080/video")
+
+        while True:
+            
+            ret, frame = video_capture.read()
+
+            
+            cv2.imshow('Video', frame)
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        
+        video_capture.release()
+        cv2.destroyAllWindows() 
+        
 def abrir():
     #    ruta=askdirectory()
 #    archivo=askopenfile()
