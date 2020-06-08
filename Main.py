@@ -40,11 +40,11 @@ showSteps = False
 def webcam():
      
 
-        video_capture = cv2.VideoCapture("http://192.168.1.66:8080/video")
+        imgOriginalScene = cv2.VideoCapture("http://192.168.1.70:8080/video")
 
         while True:
             
-            ret, frame = video_capture.read()
+            ret, frame = imgOriginalScene.read()
 
             
             cv2.imshow('Video', frame)
@@ -53,7 +53,7 @@ def webcam():
                 break
 
         
-        video_capture.release()
+        imgOriginalScene.release()
         cv2.destroyAllWindows() 
         
 def abrir():
