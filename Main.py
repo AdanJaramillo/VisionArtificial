@@ -39,13 +39,11 @@ showSteps = False
 
 def webcam():
      
-
-        imgOriginalScene = cv2.VideoCapture("http://192.168.1.70:8080/video")
+        imgOriginalScene = cv2.VideoCapture("http://192.168.1.72:8080/video")
 
         while True:
             
             ret, frame = imgOriginalScene.read()
-
             
             cv2.imshow('Video', frame)
 
@@ -135,7 +133,6 @@ def main():
     botonCompila=Button(ventana,text="Camara", command=webcam)
     botonCompila.grid(padx=210,pady=10)
     ventana.mainloop()
-
 
 # end main
 
