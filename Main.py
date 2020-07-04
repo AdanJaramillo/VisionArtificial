@@ -59,8 +59,8 @@ def abrir():
 #    archivo=askopenfile()
 #    archivo = open(archivo)
 #    lines = archivo.read()
-    Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
-    filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+    Tk().withdraw() 
+    filename = askopenfilename() 
     print(filename)
 
     blnKNNTrainingSuccessful = DetectChars.loadKNNDataAndTrainKNN()         
