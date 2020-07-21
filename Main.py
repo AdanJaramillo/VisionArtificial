@@ -21,10 +21,7 @@ import DetectPlates
 import PossiblePlate
 
 
-ventana = Tk()
-ventana.bind('<Escape>', lambda e: ventana.quit())
-lmain = Label(ventana)
-lmain.pack()
+
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
