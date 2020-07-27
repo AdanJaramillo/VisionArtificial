@@ -24,7 +24,8 @@ import mysql.connector
 
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-
+miConexion = mysql.connector.connect( host='localhost', user= 'root', passwd='', db='dateplate' )
+cur = miConexion.cursor()
 # variables ##########################################################################
 SCALAR_BLACK = (0.0, 0.0, 0.0)
 SCALAR_WHITE = (255.0, 255.0, 255.0)
@@ -106,8 +107,7 @@ def abrir():
         print("---------------------------------------- ")
         plaquita = licPlate.strChars
         ######consulta
-        miConexion = mysql.connector.connect( host='localhost', user= 'root', passwd='', db='dateplate' )
-        cur = miConexion.cursor()
+        
         rows_count = cur.execute("SELECT plate_chars, plate_acces FROM plates WHERE plate_chars ='"+plaquita+"' AND plate_acces ='true'")
         count =0
         for row in cur: 
