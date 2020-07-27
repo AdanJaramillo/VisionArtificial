@@ -20,7 +20,7 @@ import DetectChars
 import DetectPlates
 import PossiblePlate
 
-
+import mysql.connector
 
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
@@ -50,7 +50,7 @@ def webcam():
         
         imgOriginalScene.release()
         cv2.destroyAllWindows() 
-        
+#
 def abrir():
     #    ruta=askdirectory()
 #    archivo=askopenfile()
@@ -104,7 +104,21 @@ def abrir():
 
         print("\nPLACA = " + licPlate.strChars + "\n")  # escribe los caracteres en la ventana
         print("---------------------------------------- ")
+        plaquita = licPlate.strChars
+        ######consulta
+        miConexion = mysql.connector.connect( host='localhost', user= 'root', passwd='', db='dateplate' )
+        cur = miConexion.cursor()
+        rows_count = cur.execute("SELECT plate_chars, plate_acces FROM plates WHERE plate_chars ='"+plaquita+"' AND plate_acces ='true'")
+        count =0
+        for row in cur: 
+            count = 1 
+            if (count == 1): 
+                print("Acceso permitido")
+        if count == 0: 
+            print("Placa no registrada o denegada") 
 
+        miConexion.close()
+        ##########Termino de consulta
         writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)           # escribe en la imagen los caracteres
 
         cv2.imshow("imgOriginalScene", imgOriginalScene)                # vuelve a mostrar la imagen
@@ -119,6 +133,8 @@ def abrir():
 
 ###end abrir
 
+#end function   
+
 #########################################################################################################
 def main():
    
@@ -129,6 +145,7 @@ def main():
     botonAbrir.grid(padx=150,pady=100)
     botonCompila=Button(ventana,text="Camara", command=webcam)
     botonCompila.grid(padx=210,pady=10)
+    
     ventana.mainloop()
 
 # end main
@@ -186,8 +203,7 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 
             # escribe el texto en la imagen
     cv2.putText(imgOriginalScene, licPlate.strChars, (ptLowerLeftTextOriginX, ptLowerLeftTextOriginY), intFontFace, fltFontScale, SCALAR_YELLOW, intFontThickness)
-# end function
-
+# end function 
 ###################################################################################################
 if __name__ == "__main__":
     main()
