@@ -24,7 +24,7 @@ import mysql.connector
 
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
-miConexion = mysql.connector.connect( host='localhost', user= 'root', passwd='', db='dateplate' )
+miConexion = mysql.connector.connect( host='localhost', user= 'root', passwd='root', db='dateplate' )
 cur = miConexion.cursor()
 # variables ##########################################################################
 SCALAR_BLACK = (0.0, 0.0, 0.0)
